@@ -3,7 +3,6 @@ import subprocess
 import sys
 
 def simulate_keypress(key):
-    # Gebruik osascript om toetsaanslagen te simuleren
     cmd = f'''
     osascript -e 'tell application "System Events" to keystroke "{key}"'
     '''
@@ -27,6 +26,7 @@ def start_receiver():
             if data.startswith('KEY:'):
                 key = data.split(':')[1].strip()
                 simulate_keypress(key)
+                print(f"Toets ontvangen: {key}")
                 
         except Exception as e:
             print(f"Fout: {e}")
@@ -36,4 +36,6 @@ def start_receiver():
     sock.close()
 
 if __name__ == "__main__":
+    print("Toetsenbord ontvanger gestart")
+    print("Wacht op verbinding van Windows...")
     start_receiver()
